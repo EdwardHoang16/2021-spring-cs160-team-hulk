@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.UUID;
 
 
 @NoArgsConstructor
@@ -23,7 +22,7 @@ public class FarmContactInfo {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "uuid2")
     @Column(name = "id")
-    private UUID id;
+    private String id;
     @Column(name = "address")
     private String address;
     @Column(name = "phone_number")
