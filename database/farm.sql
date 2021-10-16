@@ -1,18 +1,26 @@
 USE OrganicFarm;
 
 CREATE TABLE IF NOT EXISTS farm_contact_info (
-  id CHAR(36),
+  id UUID,
   address VARCHAR(255) NOT NULL,
   phone_number VARCHAR (255) NOT NULL,
   email VARCHAR (255) NOT NULL,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  FOREIGN KEY (email)
 );
 
 CREATE TABLE IF NOT EXISTS farm (
-  id CHAR(36),
+  id UUID,
   farm_name VARCHAR (255) NOT NULL,
   img_url VARCHAR (255) NOT NULL,
   contact_id CHAR(36) UNIQUE,
   PRIMARY KEY (id),
   FOREIGN KEY (contact_id)  REFERENCES farm_contact_info(id)
+);
+
+CREATE TABLE IF NOT EXISTS USER_CREDENTIALS (
+  EMAIL VARCHAR (255) NOT NULL, 
+  SALT VARCHAR (255) NOT NULL,
+  PASSWORD VARCHAR (255) NOT NULL,
+  PRIMARY KEY (EMAIL)
 );
