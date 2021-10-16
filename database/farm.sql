@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS farm_contact_info (
   phone_number VARCHAR (255) NOT NULL,
   email VARCHAR (255) NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (email)
+  FOREIGN KEY (email) REFERENCES user_credentials(email)
 );
 
 CREATE TABLE IF NOT EXISTS farm (
