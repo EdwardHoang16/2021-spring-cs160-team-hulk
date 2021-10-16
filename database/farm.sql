@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS user_credentials (
   PRIMARY KEY (email)
 );
 
-
 CREATE TABLE IF NOT EXISTS farm_contact_info (
   id UUID,
   address VARCHAR(255) NOT NULL,
