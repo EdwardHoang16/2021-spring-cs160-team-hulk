@@ -34,4 +34,6 @@ public class FarmContactInfoController {
     public List<FarmContactInfo> addFarmContactInfo(){
         return farmContactInfoService.getFarmContactInfo();
     }
+
+
 }

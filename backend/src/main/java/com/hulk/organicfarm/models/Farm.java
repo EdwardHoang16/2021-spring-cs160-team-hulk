@@ -14,8 +14,6 @@ import javax.persistence.Table;
 @Table(name = "farm")
 public class Farm {
     @Id
-    @Column(name = "id")
-    private String id;
     @Column(name = "farm_name")
     private String farmName;
     @Column(name = "img_url")
