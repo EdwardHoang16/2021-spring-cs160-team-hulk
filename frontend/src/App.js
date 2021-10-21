@@ -1,7 +1,8 @@
-import FarmsList from "./FarmsList";
 import React, { useEffect } from "react";
+import HomePage from "./HomePage";
 import SignUpPage from "./SignUpPage";
 import axios from "axios";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 export default function App() {
     const listOfFarms = [
@@ -16,10 +17,19 @@ export default function App() {
     }
 
     return (
+        <BrowserRouter>
+          <main>
+            <Switch>
+              <Route exact path="/">
+                <HomePage listOfFarms={listOfFarms}/>
+              </Route>
+              <Route exact path="/sign-up">
+                <SignUpPage />
+              </Route>
+            </Switch>
+          </main>
 
-        <div>
-        {fetchData()}
-        <FarmsList listOfFarms = { listOfFarms } />
-        </div>
+          {fetchData()}
+        </BrowserRouter>
     );
 }
