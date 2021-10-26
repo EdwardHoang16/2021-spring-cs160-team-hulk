@@ -1,0 +1,48 @@
+.farm-marker {
+    /* width: 10vw; */
+    position: relative;
+}
+
+.farm-marker .farm__info {
+    min-width: 100px;
+    background-color: #fff;
+    padding: 5px;
+    box-shadow: 0 0 5px #000;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 20px;
+    z-index: 9;
+    position: relative;
+}
+
+.farm-marker .farm__info.hide {
+    display: none;
+}
+
+.farm-marker svg {
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.farm-marker svg:hover {
+    transform: scale(2);
+}
+
+.farm-marker.focus svg {
+    transform: scale(2);
+}
+
+.farm-marker.focus .farm__info {
+    display: block;
+}
+
+.farm-marker .farm__info .farm__title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.farm-marker path {
+    fill: blue !important;
+}
+

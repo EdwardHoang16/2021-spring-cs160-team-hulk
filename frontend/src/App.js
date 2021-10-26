@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import HomePage from "./HomePage";
 import SignUpPage from "./SignUpPage";
 import axios from "axios";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import FarmSearchLocations from "./FarmSearchLocations";
 
 export default function App() {
     const listOfFarms = [
@@ -14,16 +15,19 @@ export default function App() {
 
     return (
         <BrowserRouter>
-          <main>
-            <Switch>
-              <Route exact path="/">
-                <HomePage listOfFarms={listOfFarms}/>
-              </Route>
-              <Route exact path="/sign-up">
-                <SignUpPage />
-              </Route>
-            </Switch>
-          </main>
+            <main>
+                <Switch>
+                    <Route exact path="/">
+                        <HomePage listOfFarms={listOfFarms} />
+                    </Route>
+                    <Route exact path="/sign-up">
+                        <SignUpPage />
+                    </Route>
+                    <Route exact path="/farms">
+                        <FarmSearchLocations />
+                    </Route>
+                </Switch>
+            </main>
         </BrowserRouter>
     );
 }

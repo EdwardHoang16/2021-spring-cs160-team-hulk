@@ -1,0 +1,8 @@
+.marker svg {
+    width: 30px !important;
+    height: 30px;
+}
+
+.marker path {
+    fill: #DB5C51;
+}

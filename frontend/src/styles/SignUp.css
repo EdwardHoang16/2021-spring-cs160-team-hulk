@@ -1,0 +1,9 @@
+.center {
+    justify-content: center;
+    align-items: center;
+}
+
+.MuiButton-root.button {
+    margin-top: 10px;
+    display: block;
+}

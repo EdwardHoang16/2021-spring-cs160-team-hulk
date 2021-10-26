@@ -1,76 +1,128 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import SearchFarmList from './SearchFarmList';
+import FarmSearchBox from './FarmSearchBox';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import {
+    faMapMarkerAlt
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Marker } from './Marker';
+import './styles/Map.css';
 
-
-// const Item = styled(Paper)(({ theme }) => ({
-//     ...theme.typography.body2,
-//     padding: theme.spacing(1),
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-// }));
-
-// function embeddedMap() {
-//     return (
-//         <GoogleMap defaultZoom={10} defaultCenter={{ lat: 37.338207, lng: -121.886330 }} />
-//     )
-// }
-
-// const WrappedMap = withScriptjs(withGoogleMap(embeddedMap))
-
-// export default function Map() {
-//     return (
-
-//         <Grid item xs={8}>
-//             <Paper variant="outlined">
-//                 {/* <img src={process.env.PUBLIC_URL + '/google_map.png'} /> */}
-//                 <WrappedMap
-//                     googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places`}
-//                     loadingElement={<div style={{ height: "100%" }} />}
-//                     containerElement={<div style={{ height: "100%" }} />}
-//                     mapElement={<div style={{ height: "100%" }} />}
-//                 />
-//             </Paper>
-//         </Grid>
-
-//     );
-// }
-
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const Location = () => <div className="marker"><FontAwesomeIcon icon={faMapMarkerAlt} /></div>;
 
 class Map extends Component {
     static defaultProps = {
-        center: {
-            lat: 59.95,
-            lng: 30.33
-        },
-        zoom: 11
+        zoom: 100,
     };
 
+    constructor(props) {
+        super(props);
+        const { location } = this.props;
+
+        this.state = {
+            mapsApiLoaded: false,
+            mapInstance: null,
+            mapsapi: null,
+            center: {
+                lat: location.lat,
+                lng: location.lng
+            },
+            shouldApplyProps: true,
+            _selectedFarm: null,
+            isSearching: false,
+        };
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        const { center, shouldApplyProps, _selectedFarm, isSearching } = state;
+        const { location, selectedFarm } = props;
+        if ((center.lat !== location.lat || center.lng !== location.lng) && (shouldApplyProps || (_selectedFarm !== selectedFarm)) && !isSearching) {
+            return {
+                shouldApplyProps: false,
+                _selectedFarm: selectedFarm,
+                center: {
+                    lat: location.lat,
+                    lng: location.lng
+                }
+            }
+        } else if (isSearching) {
+            return {
+                isSearching: false
+            }
+        }
+
+        return null
+    }
+
+    apiLoaded = (map, maps) => {
+        this.setState({
+            mapsApiLoaded: true,
+            mapInstance: map,
+            mapsapi: maps,
+        });
+    }
+
+    handleSearch(data, ref) {
+        const { onSetLocation, onSelectFarm } = this.props
+        const { location } = data[0].geometry;
+        const lat = location.lat();
+        const lng = location.lng();
+        this.setState({
+            center: {
+                lat,
+                lng
+            },
+            isSearching: true,
+            _selectedFarm: null
+        })
+        onSetLocation({
+            lat,
+            lng
+        })
+        onSelectFarm(null, 'map');
+        ref.current.value = '';
+    }
+
     render() {
+        const { mapsApiLoaded, mapInstance, mapsapi, center } = this.state;
+        const { farmList, onSelectFarm } = this.props;
+
+        let markers = farmList.map(farm => {
+            return <Marker key={farm.id} farm={farm} lat={farm.lat} lng={farm.lng} onSelectFarm={onSelectFarm} />
+        })
+
         return (
             // Important! Always set the container height explicitly
             <Grid item xs={8}>
                 <Paper variant="outlined">
-                    <div style={{ height: '100vh', width: '100%' }}>
+                    <div style={{ height: '96vh', width: '100%' }}>
+                        {mapsApiLoaded && <FarmSearchBox map={mapInstance} mapsapi={mapsapi} onPlacesChanged={(data, ref) => this.handleSearch(data, ref)} />}
                         <GoogleMapReact
-                            bootstrapURLKeys={""}
-                            defaultCenter={this.props.center}
-                            defaultZoom={this.props.zoom}
+                            bootstrapURLKeys={{
+                                key: '',
+                                language: 'en'
+                            }}
+                            center={center}
+                            defaultZoom={15}
+                            onChildMouseEnter={this.onChildMouseEnter}
+                            onChildMouseLeave={this.onChildMouseLeave}
+                            onGoogleApiLoaded={({ map, maps }) => this.apiLoaded(map, maps)}
+                            yesIWantToUseGoogleMapApiInternals
                         >
-                            <AnyReactComponent
-                                lat={59.955413}
-                                lng={30.337844}
-                                text="My Marker"
+                            <Location
+                                lat={center.lat + 0.001}
+                                lng={center.lng}
                             />
+                            {markers}
                         </GoogleMapReact>
                     </div>
-                </Paper></Grid>
+                </Paper>
+            </Grid>
         );
     }
 }
-
+// https://github.com/google-map-react/google-map-react/issues/460 =
 export default Map;
