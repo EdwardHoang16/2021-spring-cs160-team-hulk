@@ -1,5 +1,3 @@
-USE OrganicFarm;
-
 CREATE TABLE IF NOT EXISTS user_credentials (
   email VARCHAR (255) NOT NULL, 
   salt VARCHAR (255) NOT NULL,

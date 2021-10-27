@@ -1,5 +1,3 @@
-
-
 spring:
   jpa:
     show-sql: true
@@ -14,3 +12,8 @@ spring:
   datasource:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/farm
+
+  servlet:
+    multipart:
+      max-file-size: 4096KB
+      max-request-size: 4096KB
