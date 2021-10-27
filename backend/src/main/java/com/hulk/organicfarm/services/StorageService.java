@@ -5,6 +5,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.FileSystemResource;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,14 @@ public class StorageService {
         path = "/mnt/data/";
     }
 
-    public void store(MultipartFile file) {
+    public boolean store(MultipartFile file) {
         // FIXME should generate file names for each upload
-
-        file.transferTo(new File(path + file.getName()));
+        try {
+            file.transferTo(new File(path + file.getName()));
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 
     public Resource loadAsResource(String filename) {
