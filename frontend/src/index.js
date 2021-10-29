@@ -7,7 +7,6 @@ import FarmSearchLocations from './FarmSearchLocations';
 ReactDOM.render(
     <React.StrictMode >
         <App />
-        {/* <FarmSearchLocations /> */}
     </React.StrictMode>,
     document.getElementById('root')
 );
