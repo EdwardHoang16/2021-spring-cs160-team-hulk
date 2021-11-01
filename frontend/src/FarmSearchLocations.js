@@ -18,10 +18,16 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function FarmSearchLocations() {
     const [farmList, setFarmList] = useState([]);
+    // location is where the map should be
     const [location, setLocation] = useState({
-        lat: 37.125016,
-        lng: -121.661899,
+        lat: 38,
+        lng: -101,
     });
+    // marker is the red marker on map
+    const [marker, setMarker] = useState({
+        lat: 38,
+        lng: -101,
+    })
     const [selectedFarm, setSelectedFarm] = useState(null);
 
     /**
@@ -54,6 +60,10 @@ export default function FarmSearchLocations() {
                     lat: farm.lat,
                     lng: farm.lng,
                 });
+                setMarker({
+                    lat: farm.lat,
+                    lng: farm.lng,
+                })
             }
         },
         [farmList]
@@ -71,6 +81,10 @@ export default function FarmSearchLocations() {
             lat: latitude,
             lng: longitude,
         });
+        setMarker({
+            lat: latitude,
+            lng: longitude,
+        })
     };
 
     useEffect(() => {
@@ -130,15 +144,33 @@ export default function FarmSearchLocations() {
         [farmList, selectedFarm]
     );
 
+    /**
+     * This is called when using search feature to set new "location" and "red marker"
+     *
+     * @param {*} lat
+     * @param {*} lng
+     */
+    const onSetLocation = (lat, lng) => {
+        setLocation({
+            lat,
+            lng
+        })
+        setMarker({
+            lat,
+            lng,
+        })
+    }
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
                 <Map
                     farmList={farmList}
                     location={location}
+                    marker={marker}
                     onSelectFarm={selectFarm}
                     selectedFarm={selectedFarm}
-                    onSetLocation={setLocation}
+                    onSetLocation={onSetLocation}
                 />
                 <Grid item xs={4}>
                     <Item className="farm-list-table">
