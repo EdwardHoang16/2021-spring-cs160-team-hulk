@@ -127,7 +127,7 @@ class Map extends Component {
                         <button className="btn-marker" onClick={() => this.getRedMarkerBack()}><FontAwesomeIcon icon={faMale} /></button>
                         <GoogleMapReact
                             bootstrapURLKeys={{
-                                key: 'AIzaSyB4iv4WFatScZofidFmwL7btq3TZVcXGbo',
+                                key: '',
                                 language: 'en'
                             }}
                             center={center}
