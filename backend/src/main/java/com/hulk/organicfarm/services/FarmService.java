@@ -26,7 +26,7 @@ public class FarmService {
         return res;
     }
 
-    public List<Farm> getFarms(String city) {
+    public List<Farm> getFarmsByCity(String city) {
         List<Farm>  res = this.farmRepository.findAll();//find all farms by city, not done yet
         if (res.isEmpty()) {
             System.out.println("Zero Farms found");
