@@ -1,37 +1,39 @@
 package com.hulk.organicfarm.controllers;
 
-//import com.hulk.organicfarm.models.FarmContactInfo;
-//import com.hulk.organicfarm.services.FarmContactInfoService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.CrossOrigin;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RestController;
-//
-//import java.util.List;
+import com.hulk.organicfarm.models.FarmContactInfo;
+import com.hulk.organicfarm.services.FarmContactInfoService;
+import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-//@CrossOrigin(origins = "*")
-//@RestController
-//@RequestMapping("/api")
-//public class FarmContactInfoController {
+import java.util.List;
 
-//    private FarmContactInfoService farmContactInfoService;
-//
-//    @Autowired
-//    public FarmContactInfoController(FarmContactInfoService farmContactInfoService) {
-//        this.farmContactInfoService = farmContactInfoService;
-//    }
-//
-//    @PostMapping("/farmContactInfos")
-//    public void addFarmContactInfo(@RequestBody FarmContactInfo farmContactInfo){
-//        System.out.println(farmContactInfo);
-//        farmContactInfoService.addFarmContactInfo(farmContactInfo);
-//    }
-//
-//    @GetMapping("/farmContactInfos")
-//    public List<FarmContactInfo> addFarmContactInfo(){
-//        return farmContactInfoService.getFarmContactInfo();
-//    }
-//}
+@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping("/api")
+public class FarmContactInfoController {
+
+    @Autowired
+    private FarmContactInfoService farmContactInfoService;
+
+    @Autowired
+    public FarmContactInfoController(FarmContactInfoService farmContactInfoService) {
+        this.farmContactInfoService = farmContactInfoService;
+    }
+
+    @PostMapping("/farmContactInfo")
+    public String addFarmContactInfo(@NonNull @RequestBody FarmContactInfo farmContactInfo){
+        System.out.println(farmContactInfo);
+        return farmContactInfoService.addFarmContactInfo(farmContactInfo);
+    }
+
+    @GetMapping("/farmContactInfo/{id}")
+    public FarmContactInfo getFarmContactInfo(@PathVariable("id") String id){
+        return farmContactInfoService.getFarmContactInfo(id);
+    }
+
+    @GetMapping("/farmContactInfo/allFarms")
+    public List<FarmContactInfo> getAllFarmsContactInfo(){
+        return farmContactInfoService.getAllFarmContactInfo();
+    }
+}
