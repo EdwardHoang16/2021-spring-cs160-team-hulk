@@ -9,9 +9,10 @@ export default function SignUpForm() {
             <h3>sign up</h3>
             <p>welcome to organic farms! enter your email to get started.</p>
             <TextField fullWidth id="outlined-basic" label="email" variant="outlined" />
-            <Button fullWidth className="button" variant="outlined">Login with Phone</Button>
-            <Button fullWidth className="button" variant="outlined">Login with Google</Button>
-            <Button fullWidth className="button" variant="outlined">Login with Facebook</Button>
+            <TextField fullWidth id="outlined-basic" label="password" variant="outlined" />
+            <Button fullWidth className="button" variant="outlined" >Log In</Button>
         </>
     )
 }
+
+
