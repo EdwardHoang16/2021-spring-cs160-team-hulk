@@ -4,6 +4,7 @@ import SignUpPage from "./SignUpPage";
 import axios from "axios";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import FarmSearchLocations from "./FarmSearchLocations";
+import Navbar from "./components/Navbar/Navbar";
 
 export default function App() {
     const listOfFarms = [
@@ -15,6 +16,7 @@ export default function App() {
 
     return (
         <BrowserRouter>
+            <Navbar />
             <main>
                 <Switch>
                     <Route exact path="/">
