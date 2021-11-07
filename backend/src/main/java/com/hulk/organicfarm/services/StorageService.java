@@ -8,7 +8,7 @@ import org.springframework.core.io.FileSystemResource;
 import java.awt.image.BufferedImage;
 import java.awt.Image;
 import java.awt.Color;
-import java.io.FileNotFoundException;
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,6 +54,10 @@ public class StorageService {
             BufferedImage image = ImageIO.read(istream);
             istream.close();
 
+            if (image == null)
+                return false;
+            // the uploaded file may not be a valid image file
+
             Resolution res = new Resolution(image.getWidth(), image.getHeight(), maxWidth, maxHeight);
 
             Image scaled = image.getScaledInstance(res.getWidth(), res.getHeight(), BufferedImage.SCALE_SMOOTH);
@@ -61,7 +65,6 @@ public class StorageService {
             BufferedImage converted = new BufferedImage(res.getWidth(), res.getHeight(), BufferedImage.TYPE_INT_RGB);
             converted.createGraphics().drawImage(scaled, 0, 0, Color.WHITE, null);
             boolean wrote = ImageIO.write(converted, "jpg", output);
-            output.close();
             return wrote;
         } catch(IOException e) {
             return false;
@@ -78,26 +81,32 @@ public class StorageService {
     public String store(MultipartFile file, int width, int height) {
         Path root = Paths.get(path);
         
+        // the folder may not exist
         if (! Files.exists(root))
             return null;
 
         String filename;
         Path filepath;
         do {
-            UUID uuid = UUID.randomUUID();
-            filename = uuid + ".jpg";
+            filename = UUID.randomUUID().toString();
             filepath = root.resolve(filename);
         } while (Files.exists(filepath));
 
         OutputStream out;
         try {
+            ByteArrayOutputStream array = new ByteArrayOutputStream();
+            // writing to output file directly may create empty file if "convertToJPEG" goes wrong.
+            // write to an in-mem array first, if "convertToJPEG" is successful, write the data to disk
+            if (! convertToJPEG(file, array, width, height))
+                return null;
+            array.close();
             out = new FileOutputStream(filepath.toFile());
-        } catch(FileNotFoundException e) {
+            array.writeTo(out);
+            out.close();
+            return filename;
+        } catch (Exception e) { // FileNotFoundException, IOException
             return null;
         }
-        if (! convertToJPEG(file, out, width, height))
-            return null;
-        return filename;
     }
 
     public Resource loadAsResource(String filename) {

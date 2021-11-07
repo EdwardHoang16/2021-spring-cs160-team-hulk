@@ -15,8 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
-
 import com.hulk.organicfarm.services.StorageService;
 
 @Controller
