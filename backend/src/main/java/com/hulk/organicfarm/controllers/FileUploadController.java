@@ -1,6 +1,7 @@
 package com.hulk.organicfarm.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,10 @@ import com.hulk.organicfarm.services.StorageService;
 public class FileUploadController {
 
 	private final StorageService storageService;
+	@Value("${user-images.max-width}")
+	private int maxWidth;
+	@Value("${user-images.max-height}")
+	private int maxHeight;
 
 	@Autowired
 	public FileUploadController(StorageService storageService) {
@@ -40,7 +45,7 @@ public class FileUploadController {
 	@ResponseBody
 	public ResponseEntity <Map <String, String>> handleFileUpload(@RequestParam("file") MultipartFile file) {
 
-		String filename = storageService.store(file, 320, 320);
+		String filename = storageService.store(file, maxWidth, maxHeight);
 		HashMap <String, String> result = new HashMap <String, String> ();
 		result.put("filename", filename);
 		return new ResponseEntity <Map <String, String>> (result, HttpStatus.OK);

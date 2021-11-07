@@ -21,3 +21,6 @@ spring:
 
 user-images:
   path: "/mnt/data/storage/"
+  max-width: 320
+  max-height: 320
+  
