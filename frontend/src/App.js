@@ -5,6 +5,8 @@ import axios from "axios";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import FarmSearchLocations from "./FarmSearchLocations";
 import Navbar from "./components/Navbar/Navbar";
+import FarmCreate from "./FarmCreate";
+import ProductCreate from "./ProductCreate";
 
 export default function App() {
     const listOfFarms = [
@@ -24,6 +26,12 @@ export default function App() {
                     </Route>
                     <Route exact path="/sign-up">
                         <SignUpPage />
+                    </Route>
+                    <Route exact path="/farms/create">
+                        <FarmCreate />
+                    </Route>
+                    <Route exact path="/products/create">
+                        <ProductCreate />
                     </Route>
                     <Route exact path="/farms">
                         <FarmSearchLocations />
