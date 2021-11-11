@@ -1,7 +1,7 @@
 import React from "react";
 import FoodItem from "./FoodItem.js"
 
-export default function Farm({details}) {
+export default function Farm({ details }) {
     const foodList = details.inventory.map(foodItem => {
         return <FoodItem key={foodItem.title} foodItem={foodItem} />
     })

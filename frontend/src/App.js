@@ -4,6 +4,7 @@ import SignUpPage from "./SignUpPage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import FarmSearchLocations from "./FarmSearchLocations";
 import { createTheme, ThemeProvider } from "@mui/material";
+import Navbar from "./components/Navbar/Navbar";
 
 export default function App() {
     const listOfFarms = [
@@ -24,6 +25,7 @@ export default function App() {
     return (
         <ThemeProvider theme={theme}>
             <BrowserRouter>
+                <Navbar />
                 <main>
                     <Switch>
                         <Route exact path="/">

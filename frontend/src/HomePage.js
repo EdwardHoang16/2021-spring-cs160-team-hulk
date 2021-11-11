@@ -1,5 +1,4 @@
 import React from "react"
-import Navbar from "./components/Navbar/Navbar";
 import FarmsList from "./FarmsList";
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -26,7 +25,7 @@ const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main
 }));
 
-export default function HomePage({listOfFarms}) {
+export default function HomePage({ listOfFarms }) {
     return (
         <>
             <Navbar />
@@ -121,6 +120,7 @@ export default function HomePage({listOfFarms}) {
                     </Grid>
                 </Grid>
             </Box>
+            <FarmsList listOfFarms={listOfFarms} />
         </>
     )
 }

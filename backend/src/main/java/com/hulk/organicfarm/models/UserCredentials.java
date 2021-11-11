@@ -38,6 +38,7 @@ public class UserCredentials {
         this.password = password;
     }
 
+
     public UserCredentials() {}
 
 
@@ -74,3 +75,4 @@ public class UserCredentials {
                 '}';
     }
 }
+
