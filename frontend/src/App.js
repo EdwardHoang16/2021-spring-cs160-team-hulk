@@ -1,6 +1,7 @@
 import React from "react";
 import HomePage from "./HomePage";
 import SignUpPage from "./SignUpPage";
+import LogInForm from "./LogInForm";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import FarmSearchLocations from "./FarmSearchLocations";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -33,6 +34,9 @@ export default function App() {
                         </Route>
                         <Route exact path="/sign-up">
                             <SignUpPage />
+                        </Route>
+                        <Route exact path="/login">
+                            <LogInForm />
                         </Route>
                         <Route exact path="/farms">
                             <FarmSearchLocations />
