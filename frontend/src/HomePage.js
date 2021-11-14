@@ -120,6 +120,7 @@ export default function HomePage({ listOfFarms }) {
                     </Grid>
                 </Grid>
             </Box>
+            
             <FarmsList listOfFarms={listOfFarms} />
         </>
     )
