@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";
 import FarmCreate from "./FarmCreate";
 import ProductCreate from "./ProductCreate";
+import FarmDetail from "./FarmDetail";
 
 export default function App() {
     const listOfFarms = [
@@ -48,6 +49,9 @@ export default function App() {
                     </Route>
                         <Route exact path="/farms">
                             <FarmSearchLocations />
+                        </Route>
+                        <Route exact path="/farms/:id">
+                            <FarmDetail />
                         </Route>
                     </Switch>
                 </main>

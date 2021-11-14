@@ -6,8 +6,8 @@ import "./SignUp.css";
 export default function SignUpForm() {
     return (
         <>
-            <h3>sign up</h3>
-            <p>welcome to organic farms! enter your email to get started.</p>
+            <h3>Sign Up</h3>
+            <p>Welcome to Organic Farms! Enter your email to get started.</p>
             <TextField fullWidth id="outlined-basic" label="email" variant="outlined" />
             <TextField fullWidth id="outlined-basic" label="password" variant="outlined" />
             <Button fullWidth className="button" variant="outlined" >Log In</Button>
