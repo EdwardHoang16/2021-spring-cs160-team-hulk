@@ -8,5 +8,6 @@ export default function FarmsList({listOfFarms}) {
     let res = listOfFarms.map(farm => {
         return <Farm key={farm.id} details={farm} />
     })
-    return res
+
+    return res;
 }

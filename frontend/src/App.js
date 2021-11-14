@@ -6,6 +6,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import FarmSearchLocations from "./FarmSearchLocations";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";
+import FarmDetail from "./FarmDetail";
 
 export default function App() {
     const listOfFarms = [
@@ -40,6 +41,9 @@ export default function App() {
                         </Route>
                         <Route exact path="/farms">
                             <FarmSearchLocations />
+                        </Route>
+                        <Route exact path="/farms/:id">
+                            <FarmDetail />
                         </Route>
                     </Switch>
                 </main>
