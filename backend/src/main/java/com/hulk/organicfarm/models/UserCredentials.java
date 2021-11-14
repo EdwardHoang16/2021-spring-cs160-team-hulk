@@ -1,6 +1,9 @@
 package com.hulk.organicfarm.models;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity(name= "UserCredentials")
 @Table(
@@ -37,7 +40,6 @@ public class UserCredentials {
         this.email = email;
         this.password = password;
     }
-
 
     public UserCredentials() {}
 

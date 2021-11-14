@@ -5,13 +5,15 @@ import com.hulk.organicfarm.repositories.FarmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Locale;
+import java.util.Optional;
 
 @Service
 public class FarmService {
 
-    private FarmRepository farmRepository;
+    private final FarmRepository farmRepository;
+
     @Autowired
     public FarmService(FarmRepository farmRepository) {
         this.farmRepository = farmRepository;
@@ -35,9 +37,17 @@ public class FarmService {
         return res;
     }
 
+    @Transactional
+    public Farm getFarmById(String farmId){
+        Optional<Farm> farmOptional = farmRepository.findById(farmId);
+        return farmOptional.orElse(null);
+    }
+
+    @Transactional
     public String addFarm(Farm farm) {
         System.out.println(farm);
         try {
+            System.out.println("INSIDE");
             farmRepository.save(farm);
         } catch (Exception e) {
             return "Error! Could not add new Record";

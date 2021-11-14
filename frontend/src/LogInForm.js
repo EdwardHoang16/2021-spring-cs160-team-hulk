@@ -24,9 +24,9 @@ const SignUpForm = () => {
   };
 
   // login the user
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = { email : username, password : password };
+    const user = { email: username, password: password };
     // send the username and password to the server
     const response = await axios.post(
       "http://localhost:8080/api/userCredentials",
