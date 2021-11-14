@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import HomePage from "./HomePage";
 import SignUpPage from "./SignUpPage";
-import axios from "axios";
+import LogInForm from "./LogInForm";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import FarmSearchLocations from "./FarmSearchLocations";
+import { createTheme, ThemeProvider } from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";
 import FarmCreate from "./FarmCreate";
 import ProductCreate from "./ProductCreate";
@@ -16,28 +17,41 @@ export default function App() {
         { id: 4, title: "Golden Oaks Acre", inventory: [{ title: "Carrots", price: "$2/pound", img: "https://images.unsplash.com/photo-1447175008436-054170c2e979?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=999&q=80" }], img: "https://images.unsplash.com/photo-1585499193151-0f50d54c4e1c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=872&q=80" }
     ];
 
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#008000'
+            }
+        }
+    })
+
     return (
-        <BrowserRouter>
-            <Navbar />
-            <main>
-                <Switch>
-                    <Route exact path="/">
-                        <HomePage listOfFarms={listOfFarms} />
-                    </Route>
-                    <Route exact path="/sign-up">
-                        <SignUpPage />
-                    </Route>
+        <ThemeProvider theme={theme}>
+            <BrowserRouter>
+                <Navbar />
+                <main>
+                    <Switch>
+                        <Route exact path="/">
+                            <HomePage listOfFarms={listOfFarms} />
+                        </Route>
+                        <Route exact path="/sign-up">
+                            <SignUpPage />
+                        </Route>
+                        <Route exact path="/login">
+                            <LogInForm />
+                        </Route>
                     <Route exact path="/farms/create">
                         <FarmCreate />
                     </Route>
                     <Route exact path="/products/create">
                         <ProductCreate />
                     </Route>
-                    <Route exact path="/farms">
-                        <FarmSearchLocations />
-                    </Route>
-                </Switch>
-            </main>
-        </BrowserRouter>
+                        <Route exact path="/farms">
+                            <FarmSearchLocations />
+                        </Route>
+                    </Switch>
+                </main>
+            </BrowserRouter>
+        </ThemeProvider>
     );
 }

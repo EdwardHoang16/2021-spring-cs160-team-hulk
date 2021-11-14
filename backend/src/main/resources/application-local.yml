@@ -2,6 +2,7 @@ spring:
   jpa:
     show-sql: true
     database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create-drop
     properties:
@@ -12,7 +13,15 @@ spring:
     driverClassName: org.h2.Driver
     url: jdbc:h2:mem:farm
 
+
   servlet:
     multipart:
       max-file-size: 4096KB
       max-request-size: 4096KB
+
+
+user-images:
+  path: "/mnt/data/storage/"
+  max-width: 320
+  max-height: 320
+  
