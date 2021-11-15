@@ -1,3 +1,8 @@
+Cypress Tests:
+Run npm start to start the React application.
+Then run npm test on a different terminal to start the cypress tests.
+The frontend end-to-end tests are located in test.js in the cypress folder.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -9,6 +9,10 @@ export default function FarmDetail() {
     let params = useParams();
     let details = listOfFarms.find(farm => farm.id == params.id);
 
+    if (!details) {
+        return null;
+    }
+
     return (
         <>
             <Card sx={{ width: 1 }}>
