@@ -2,7 +2,6 @@ import * as React from "react";
 import { Grid } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
-import "./ProductCreate.css";
 import axios from "axios";
 
 import "./styles/SearchFarmList.css";
@@ -15,6 +14,10 @@ export default function ProductCreate(props) {
 
   // 1: productName
   const [errors, setErrors] = React.useState([]);
+
+  const styles = {
+    width: 600, //assign the width as your requirement
+  };
 
   const handleChange = (value, type) => {
     let _errors = [];
@@ -88,26 +91,29 @@ export default function ProductCreate(props) {
   return (
     <Grid
       container
-      spacing={0}
+      spacing={3}
       direction="column"
       display="flex"
       alignItems="center"
       justify="center"
       style={{ minHeight: "100vh" }}
     >
+      <h3>Create a Product</h3>
       <Grid item xs={3}>
-        <h3>Create a Product</h3>
         <TextField
+          style={{ width: styles.width }}
           required
           error={errors.includes(1)}
           onChange={(e) => handleChange(e.target.value, "productName")}
-          fullWidth
           id="outlined-basic"
           value={productName}
           label="Product Name"
           variant="outlined"
         />
+      </Grid>
+      <Grid item xs={3}>
         <TextField
+          style={{ width: styles.width }}
           required
           error={errors.includes(2)}
           onChange={(e) => handleChange(e.target.value, "imgUrl")}
@@ -116,7 +122,10 @@ export default function ProductCreate(props) {
           label="Img URL"
           variant="outlined"
         />
+      </Grid>
+      <Grid item xs={3}>
         <TextField
+          style={{ width: styles.width }}
           required
           onChange={(e) => handleChange(e.target.value, "quantity")}
           type="number"
@@ -124,7 +133,10 @@ export default function ProductCreate(props) {
           label="Quantity"
           inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
         />
+      </Grid>
+      <Grid item xs={3}>
         <TextField
+          style={{ width: styles.width }}
           value={price}
           required
           onChange={(e) => handleChange(e.target.value, "price")}
@@ -133,7 +145,10 @@ export default function ProductCreate(props) {
           label="Price"
           inputProps={{ inputMode: "decimal", pattern: "[0-9]*" }}
         />
+      </Grid>
+      <Grid item xs={3}>
         <Button
+          style={{ width: styles.width }}
           fullWidth
           className="button"
           variant="outlined"
