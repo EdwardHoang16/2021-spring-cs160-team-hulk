@@ -19,6 +19,7 @@ spring:
       max-file-size: 4096KB
       max-request-size: 4096KB
 
+
 user-images:
   path: "/mnt/data/storage/"
   max-width: 320

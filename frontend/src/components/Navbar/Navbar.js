@@ -23,6 +23,12 @@ export default function Navbar() {
           <NavLink to='/services'>
             Services
           </NavLink>
+          <NavLink to='/farms/create'>
+            Create Farms
+          </NavLink>
+          <NavLink to='/products/create'>
+            Create Products
+          </NavLink>
           <NavLink to='/farms'>
             Farms
           </NavLink>

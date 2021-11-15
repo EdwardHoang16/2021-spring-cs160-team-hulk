@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface FarmRepository extends JpaRepository<Farm,String> {
+public interface FarmRepository extends JpaRepository<Farm, String> {
 //    @Query(value = String.valueOf("Select from Farm where city = %s ;", city))
 //    public List<Farm> getFarmsNearACity(String city);
 }

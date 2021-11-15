@@ -6,6 +6,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import FarmSearchLocations from "./FarmSearchLocations";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";
+import FarmCreate from "./FarmCreate";
+import ProductCreate from "./ProductCreate";
 import FarmDetail from "./FarmDetail";
 
 export default function App() {
@@ -39,6 +41,12 @@ export default function App() {
                         <Route exact path="/login">
                             <LogInForm />
                         </Route>
+                    <Route exact path="/farms/create">
+                        <FarmCreate />
+                    </Route>
+                    <Route exact path="/products/create">
+                        <ProductCreate />
+                    </Route>
                         <Route exact path="/farms">
                             <FarmSearchLocations />
                         </Route>

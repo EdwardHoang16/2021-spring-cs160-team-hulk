@@ -1,15 +1,31 @@
 package com.hulk.organicfarm.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
-import java.util.UUID;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity(name= "Farm")
 @Table(
         name= "farm"
 )
 
+@NoArgsConstructor
+@Setter
+@Getter
+@AllArgsConstructor
+@ToString
 public class Farm {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -20,57 +36,32 @@ public class Farm {
     @Column(name = "farm_name", nullable = false)
     private String farmName;
 
+    @Column(name = "description", nullable = false)
+    private String description;
+
     @Column(name = "img_url", nullable = false)
     private String imgUrl;
 
-    @Column(name = "contact_id", nullable=false)
-    private String contactID;
+    @Column(name = "address", nullable = false)
+    private String address;
 
-    @Column(name = "city")
-    private String city;
+    @Column(name = "contact", nullable=false)
+    private String contact;
 
-    public Farm(String farmName, String imgUrl, String farmContactInfo, String city) {
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "email",
+            referencedColumnName = "email"
+    )
+    private UserCredentials userCredentials;
+
+    public Farm(String farmName, String description, String imgUrl, String address, String contact) {
         this.farmName = farmName;
+        this.description = description;
         this.imgUrl = imgUrl;
-        this.contactID = farmContactInfo;
-        this.city = city;
-    }
-
-    public Farm(){ }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getFarmName() {
-        return farmName;
-    }
-
-    public void setFarmName(String farmName) {
-        this.farmName = farmName;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    public String getContactID() {
-        return contactID;
-    }
-
-    public void setContactID(String contactID) {
-        this.contactID = contactID;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
+        this.address = address;
+        this.contact = contact;
     }
 }
