@@ -22,6 +22,9 @@ public class ProductService {
     @Transactional
     public Product addProduct(Product product, String farmId){
         Farm farmById = farmService.getFarmById(farmId);
+        if (farmById == null) {
+            throw new RuntimeException("Farm id " + farmId + " does not exist. Please try again");
+        }
         product.setFarm(farmById);
         return this.productRepository.save(product);
     }

@@ -1,11 +1,10 @@
 package com.hulk.organicfarm.controllers;
 
-import com.hulk.organicfarm.models.Farm;
 import com.hulk.organicfarm.models.Product;
-import com.hulk.organicfarm.services.FarmService;
 import com.hulk.organicfarm.services.ProductService;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +25,12 @@ public class ProductController {
     }
 
     @PostMapping("/{farmId}/products")
-    public Product addProducts(@NonNull @RequestBody Product product, @PathVariable String farmId){
-        return productService.addProduct(product, farmId);
+    public ResponseEntity<Product> addProducts(@NonNull @RequestBody Product product, @PathVariable String farmId){
+
+        Product createdProduct = productService.addProduct(product, farmId);
+        if(createdProduct == null){
+            throw new RuntimeException("farm id not found!!!");
+        }
+        return ResponseEntity.ok(createdProduct);
     }
 }
