@@ -17,7 +17,7 @@ const SignUpForm = () => {
 
   // logout the user
   const handleLogout = () => {
-    setUser({});
+    setUser(null);
     setUsername("");
     setPassword("");
     localStorage.clear();
@@ -26,13 +26,33 @@ const SignUpForm = () => {
   // login the user
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = { email: username, password: password };
+    const userCredentials = { email: username, password: password };
     // send the username and password to the server
-    const response = await axios.post(
-      "http://localhost:8080/api/userCredentials",
-      user
-    );
-
+    const json = JSON.stringify({ email: username, password: password });
+    console.log(userCredentials);
+    const response = await axios
+      .get(`http://localhost:8080/api/userCredentials/verifyCredentials/${username}/${password}`)
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          // error.request is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
+    console.log(response);
+    if (!response.data) {
+      console.log("invalid");
+      return;
+    }
     // set the state of the user
     setUser(response.data);
 
@@ -48,32 +68,32 @@ const SignUpForm = () => {
         <button onClick={handleLogout}>logout</button>
       </div>
     );
-  }
-
-  // if there's no user, show the login form
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username: </label>
-        <input
-          type="text"
-          value={username}
-          placeholder="enter a username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
-        <div>
-          <label htmlFor="password">password: </label>
+  } else {
+    // if there's no user, show the login form
+    return (
+      <div>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="username">Username: </label>
           <input
-            type="password"
-            value={password}
-            placeholder="enter a password"
-            onChange={({ target }) => setPassword(target.value)}
+            type="text"
+            value={username}
+            placeholder="enter a username"
+            onChange={({ target }) => setUsername(target.value)}
           />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
+          <div>
+            <label htmlFor="password">password: </label>
+            <input
+              type="password"
+              value={password}
+              placeholder="enter a password"
+              onChange={({ target }) => setPassword(target.value)}
+            />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    );
+  }
 };
 
 export default SignUpForm;
