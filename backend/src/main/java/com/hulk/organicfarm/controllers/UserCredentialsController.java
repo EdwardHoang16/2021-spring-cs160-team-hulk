@@ -14,7 +14,6 @@ import java.security.NoSuchAlgorithmException;
 @RequestMapping("/api")
 public class UserCredentialsController {
 
-     @Autowired
      private final UserCredentialsService userCredentialsService;
 
      @Autowired
@@ -27,20 +26,21 @@ public class UserCredentialsController {
          return userCredentialsService.addNewUserCredentialsRecord(userCredentials);
      }
 
-     @GetMapping("/userCredentials/{email}")
-     public UserCredentials getUserCredentialByEmail(@PathVariable("email") String email){
-         return userCredentialsService.getUserCredentialsByEmail(email);
-     }
+//     @GetMapping("/userCredentials/{email}")
+//     public UserCredentials getUserCredentialByEmail(@PathVariable("email") String email){
+//         return userCredentialsService.getUserCredentialsByEmail(email);
+//     }
 
-    @GetMapping("/userCredentials/verifyCredentials")
+    @GetMapping("/userCredentials/verify")
     public boolean verifyUserCredentials(@NonNull @RequestBody UserCredentials userCredentials) throws NoSuchAlgorithmException {
+        System.out.println(userCredentials);
         return userCredentialsService.isValidCredentials(userCredentials);
     }
 
-//     @GetMapping("/userCredentials/verifyCredentials/{email}/{password}")
-//     public boolean verifyUserCredentials(@PathVariable("email") String email, @PathVariable("password") String password) throws NoSuchAlgorithmException {
-//         return userCredentialsService.isValidCredentials(new UserCredentials(email,password));
-//     }
-//
+     @GetMapping("/userCredentials/verifyCredentials/{email}/{password}")
+     public boolean verifyUserCredentials(@PathVariable("email") String email, @PathVariable("password") String password) throws NoSuchAlgorithmException {
+         return userCredentialsService.isValidCredentials(new UserCredentials(email,password));
+     }
+
 
 }

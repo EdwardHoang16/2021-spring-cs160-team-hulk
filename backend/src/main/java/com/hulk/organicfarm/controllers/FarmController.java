@@ -7,6 +7,7 @@ import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +34,15 @@ public class FarmController {
 
     @PostMapping("/farms")
     public void addFarms(@NonNull @RequestBody Farm farm){
-        UserCredentials userCredentials = new UserCredentials("trido@sjsu.edu", "1234");
+        UserCredentials userCredentials = new UserCredentials("asd@yahoo.com", "1234");
         farm.setUserCredentials(userCredentials);
         farmService.addFarm(farm);
         System.out.println("save successfully");
+    }
+
+    @GetMapping("/farms/{farmId}")
+    public Farm getFarmById(@PathVariable String farmId) {
+        System.out.println(farmId);
+        return this.farmService.getFarmById(farmId);
     }
 }
