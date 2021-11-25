@@ -4,20 +4,16 @@ import axios from "axios";
 const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState();
 
   //checks if a user has previously logged in.
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      setUser(foundUser);
-    }
+    setIsLoggedIn(localStorage.key("isLoggedIn"));
   }, []);
 
   // logout the user
   const handleLogout = () => {
-    setUser(null);
+    setIsLoggedIn(false);
     setUsername("");
     setPassword("");
     localStorage.clear();
@@ -54,17 +50,18 @@ const SignUpForm = () => {
       return;
     }
     // set the state of the user
-    setUser(response.data);
+    setIsLoggedIn(response.data);
 
     // store the user in localStorage
-    localStorage.setItem("user", JSON.stringify(response.data));
+    localStorage.setItem("email", username);
+    localStorage.setItem("isLoggedIn", JSON.stringify(response.data));
   };
 
   // if there's a user show the message below
-  if (user) {
+  if (isLoggedIn) {
     return (
       <div>
-        {user.name} is loggged in
+        you loggged in
         <button onClick={handleLogout}>logout</button>
       </div>
     );
