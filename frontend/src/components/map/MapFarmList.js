@@ -16,10 +16,10 @@ export default function SearchFarmList(props) {
         data-id={farm.id}
         className="farm-table-item"
       >
-        <CardMedia component="img" height="140" image={farm.img} alt="green iguana" />
+        <CardMedia component="img" height="140" image={farm.imgUrl} alt="green iguana" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {farm.title}
+            {farm.farmName}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {farm.description}

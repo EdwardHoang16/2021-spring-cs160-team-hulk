@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
-import FarmSearchBox from "./FarmSearchBox";
+import FarmSearchBox from "./MapSearchBox";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { faMapMarkerAlt, faMale } from "@fortawesome/free-solid-svg-icons";
@@ -34,22 +34,6 @@ class Map extends Component {
       _selectedFarm: null,
       isSearching: false,
     };
-  }
-
-  // fetch the farm locations and convert their address to lng & lat
-  async componentDidMount() {
-    // 1. call api to backend
-    const response = await axios.get("http://localhost:8080/api/farms");
-    let data = response.data;
-    // 2. get the address and call api to Google to convert to lng, lat
-    let newFarmList = [];
-    data.map(async (farm) => {
-      const responseFromGG =
-        await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${farm.address}&key=AIzaSyB4iv4WFatScZofidFmwL7btq3TZVcXGbo
-      `);
-      
-      console.log(responseFromGG.data);
-    });
   }
 
   static getDerivedStateFromProps(props, state) {

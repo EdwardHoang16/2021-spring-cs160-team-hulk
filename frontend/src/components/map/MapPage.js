@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
-import SearchFarmList from "./SearchFarmList";
+import SearchFarmList from "./MapFarmList";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Map from "./Map";
 import { listOfFarms } from "../../mock-data";
+import axios from "axios";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -87,11 +88,29 @@ export default function FarmSearchLocations() {
     });
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     // ComponentDidMount
+    // 1. call api to backend
+    const response = await axios.get("http://localhost:8080/api/farms");
+    let data = response.data;
+    data = Promise.all(
+      data.map(async (obj) => {
+        // 2. get the address and call api to Google to convert to lng, lat
+        const responseFromGG =
+          await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${obj.address}&key=AIzaSyB4iv4WFatScZofidFmwL7btq3TZVcXGbo
+      `);
+        const { lat, lng } = responseFromGG.data.results[0].geometry.location;
+        const cloneObj = { ...obj };
+        delete cloneObj.address;
+        cloneObj["lat"] = lat;
+        cloneObj["lng"] = lng;
+        return cloneObj;
+      })
+    ).then((listOfFarms) => {
+      setFarmList(listOfFarms);
+    });
 
     // Apply mock data. This should be removed by real API fetching below
-    setFarmList(listOfFarms);
 
     // Call API to fetch data here
 
