@@ -1,7 +1,6 @@
 package com.hulk.organicfarm.controllers;
 
 import com.hulk.organicfarm.models.Farm;
-import com.hulk.organicfarm.models.UserCredentials;
 import com.hulk.organicfarm.services.FarmService;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -32,11 +32,9 @@ public class FarmController {
         return this.farmService.getFarms();
     }
 
-    @PostMapping("/farms")
-    public void addFarms(@NonNull @RequestBody Farm farm){
-        UserCredentials userCredentials = new UserCredentials("asd@yahoo.com", "1234");
-        farm.setUserCredentials(userCredentials);
-        farmService.addFarm(farm);
+    @PostMapping("/farms/{email}")
+    public void addFarms(@NonNull @RequestBody Farm farm, @PathVariable String email){
+        farmService.addFarm(farm, email);
         System.out.println("save successfully");
     }
 
@@ -44,5 +42,10 @@ public class FarmController {
     public Farm getFarmById(@PathVariable String farmId) {
         System.out.println(farmId);
         return this.farmService.getFarmById(farmId);
+    }
+
+    @GetMapping("/farms/")
+    public List<Farm> getFarmsByEmail(@RequestParam String email){
+        return farmService.getFarmsByEmail(email);
     }
 }
