@@ -8,7 +8,18 @@ import "../../styles/SearchFarmList.css";
 
 export default function SearchFarmList(props) {
   const { farmList, onSelectFarm } = props;
-  const displayFram = () => {
+
+  const shortenContent = (content) => {
+    const maxLength = 150; 
+    let trimmedString = content.substr(0, maxLength);
+    trimmedString = trimmedString.substr(
+      0,
+      Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+    );
+    return trimmedString;
+  };
+
+  const displayFarm = () => {
     return farmList.map((farm) => (
       <CardActionArea
         key={farm.id}
@@ -22,11 +33,11 @@ export default function SearchFarmList(props) {
             {farm.farmName}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {farm.description}
+            {shortenContent(farm.description)}...
           </Typography>
         </CardContent>
       </CardActionArea>
     ));
   };
-  return <Card sx={{ maxWidth: 630 }}>{displayFram()}</Card>;
+  return <Card sx={{ maxWidth: 630 }}>{displayFarm()}</Card>;
 }
