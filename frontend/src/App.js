@@ -13,6 +13,7 @@ import axios from "axios";
 
 export default function App() {
   const [listOfFarms, setListOfFarms] = useState([]);
+  const [listOfProducts, setListOfProducts] = useState([]);
   // const listOfFarms = [
   //   {
   //     id: 1,
@@ -65,9 +66,11 @@ export default function App() {
   // ];
 
   useEffect(async () => {
-    const result = await axios.get("http://localhost:8080/api/farms");
-    
-    setListOfFarms(result.data);
+    const resultFromFarm = await axios.get("http://localhost:8080/api/farms"); // fetch farm
+    const resultFromProduct = await axios.get("http://localhost:8080/api/farms/products"); // fetch product
+
+    setListOfFarms(resultFromFarm.data);
+    setListOfProducts(resultFromProduct.data);
   }, []);
 
   const theme = createTheme({
