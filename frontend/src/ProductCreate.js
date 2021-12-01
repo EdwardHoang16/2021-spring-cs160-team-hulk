@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Grid } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Grid, MenuItem, Select } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import axios from "axios";
@@ -11,6 +11,16 @@ export default function ProductCreate(props) {
   const [imgUrl, setImgUrl] = React.useState(""); // 2
   const [price, setPrice] = React.useState(0.0);
   const [quantity, setQuantity] = React.useState(0);
+  const [farmId, setFarmId] = React.useState("");
+  const [farms, setFarms] = React.useState([]);
+
+  useEffect(async () => {
+    const email = localStorage.getItem("email");
+    const result = await axios.get(`http://localhost:8080/api/farms?email=${email}`);
+    setFarms(result.data);
+    console.log(result.data);
+    // setListOfFarms(result.data);
+  }, []);
 
   // 1: productName
   const [errors, setErrors] = React.useState([]);
@@ -41,6 +51,11 @@ export default function ProductCreate(props) {
         _errors = errors.filter((id) => id !== 3);
         setErrors(_errors);
         setQuantity(value);
+        break;
+      case "farmId":
+        _errors = errors.filter((id) => id !== 3);
+        setErrors(_errors);
+        setFarmId(value);
         break;
       default:
         break;
@@ -78,14 +93,23 @@ export default function ProductCreate(props) {
     };
 
     // extract farm id
-    const farmId = "06917567-5a47-435f-95ed-330fecfb38ac";
 
     const response = await axios.post(
       `http://localhost:8080/api/farms/${farmId}/products`,
       product
     );
 
-    console.log(product);
+    console.log(response);
+  };
+
+  const displaySelectOptions = () => {
+    return farms.map((farm) => {
+      return (
+        <MenuItem key={farm.id} value={farm.id}>
+          {farm.farmName}
+        </MenuItem>
+      );
+    });
   };
 
   return (
@@ -145,6 +169,17 @@ export default function ProductCreate(props) {
           label="Price"
           inputProps={{ inputMode: "decimal", pattern: "[0-9]*" }}
         />
+      </Grid>
+      <Grid item xs={3}>
+        <Select
+          style={{ width: styles.width }}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={farmId}
+          onChange={(e) => handleChange(e.target.value, "farmId")}
+        >
+          {displaySelectOptions()}
+        </Select>
       </Grid>
       <Grid item xs={3}>
         <Button

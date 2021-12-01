@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS farm (
   id UUID,
   farm_name VARCHAR (255) NOT NULL,
   description TEXT NOT NULL,
-  img_url VARCHAR (255) NOT NULL,
+  img_url TEXT NOT NULL,
   address VARCHAR (255) NOT NULL,
   user_email VARCHAR (255) NOT NULL,
   contact VARCHAR (255) NOT NULL,

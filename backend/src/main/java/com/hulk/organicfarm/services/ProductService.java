@@ -28,4 +28,9 @@ public class ProductService {
         product.setFarm(farmById);
         return this.productRepository.save(product);
     }
+
+
+//    public List<Product> getProducts(String farmId){
+//        return productRepository.find();
+//    }
 }

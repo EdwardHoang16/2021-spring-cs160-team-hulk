@@ -33,4 +33,9 @@ public class ProductController {
         }
         return ResponseEntity.ok(createdProduct);
     }
+
+//    @GetMapping("/{farmId}/products")
+//    public List<Product> getProducts(@PathVariable String farmId) {
+//        return productService.getProducts(farmId);
+//    }
 }

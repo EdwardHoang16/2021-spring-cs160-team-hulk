@@ -1,7 +1,9 @@
 package com.hulk.organicfarm.services;
 
 import com.hulk.organicfarm.models.Farm;
+import com.hulk.organicfarm.models.UserCredentials;
 import com.hulk.organicfarm.repositories.FarmRepository;
+import com.hulk.organicfarm.repositories.UserCredentialsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +15,12 @@ import java.util.Optional;
 public class FarmService {
 
     private final FarmRepository farmRepository;
+    private final UserCredentialsRepository userCredentialsRepository;
 
     @Autowired
-    public FarmService(FarmRepository farmRepository) {
+    public FarmService(FarmRepository farmRepository, UserCredentialsRepository userCredentialsRepository) {
         this.farmRepository = farmRepository;
+        this.userCredentialsRepository = userCredentialsRepository;
     }
 
     public List<Farm> getFarms() {
@@ -44,15 +48,20 @@ public class FarmService {
     }
 
     @Transactional
-    public String addFarm(Farm farm) {
-        System.out.println(farm);
+    public String addFarm(Farm farm, String email) {
+        Optional<UserCredentials> byEmail = userCredentialsRepository.findById(email);
+        UserCredentials userCredentials = byEmail.orElseThrow(() -> new IllegalArgumentException("Could not fetch the user"));
         try {
-            System.out.println("INSIDE");
+            farm.setUserCredentials(userCredentials);
             farmRepository.save(farm);
         } catch (Exception e) {
             return "Error! Could not add new Record";
         }
         return "Record Successfully Added!";
+    }
+
+    public List<Farm> getFarmsByEmail(String email){
+        return farmRepository.getFarmsByEmail(email);
     }
 
 }

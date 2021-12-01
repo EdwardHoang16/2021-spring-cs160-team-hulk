@@ -36,10 +36,10 @@ public class Farm {
     @Column(name = "farm_name", nullable = false)
     private String farmName;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "img_url", nullable = false)
+    @Column(name = "img_url", nullable = false, columnDefinition = "TEXT")
     private String imgUrl;
 
     @Column(name = "address", nullable = false)

@@ -53,12 +53,11 @@ export default function FarmCreate() {
       imgUrl: imgUrl,
       address: address,
       contact: contact,
-      email: "tri.do@sjsu.edu",
     };
-    console.log(farm);
-    const response = await axios.post("http://localhost:8080/api/farms", farm);
-
-    console.log(response);
+    const email = localStorage.getItem("email");
+    if (email) {
+      await axios.post(`http://localhost:8080/api/farms/${email}`, farm);
+    }
   };
 
   return (
