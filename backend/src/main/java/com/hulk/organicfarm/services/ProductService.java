@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -28,9 +29,13 @@ public class ProductService {
         product.setFarm(farmById);
         return this.productRepository.save(product);
     }
+    @Transactional
+    public List<Product> getProducts(){
+        return productRepository.findAll();
+    }
 
-
-//    public List<Product> getProducts(String farmId){
-//        return productRepository.find();
-//    }
+    @Transactional
+    public List<Product> getProductsByFarmId(String farmId){
+        return productRepository.findProductsByFarmId(farmId);
+    }
 }
