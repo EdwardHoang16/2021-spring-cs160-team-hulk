@@ -44,6 +44,11 @@ export default function FarmCreate() {
   const handleSubmit = () => {
     // call backend
     processData();
+    setFarmName("");
+    setDescription("");
+    setImgUrl("");
+    setAddress("");
+    setContact("");
   };
 
   const processData = async () => {
@@ -94,6 +99,7 @@ export default function FarmCreate() {
           fullWidth
           rows={5}
           variant="outlined"
+          value={description}
         />
       </Grid>
       <Grid item xs={3}>
@@ -105,6 +111,7 @@ export default function FarmCreate() {
           id="outlined-basic"
           label="Logo"
           variant="outlined"
+          value={imgUrl}
         />
       </Grid>
       <Grid item xs={3}>
@@ -116,6 +123,7 @@ export default function FarmCreate() {
           id="outlined-basic"
           label="Address"
           variant="outlined"
+          value={address}
         />
       </Grid>
       <Grid item xs={3}>
@@ -127,6 +135,7 @@ export default function FarmCreate() {
           id="outlined-basic"
           label="Contact"
           variant="outlined"
+          value={contact}
         />
       </Grid>
       <Grid item xs={3}>

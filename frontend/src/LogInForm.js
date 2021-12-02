@@ -1,15 +1,31 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { Grid, Button, TextField } from "@mui/material";
 
-const SignUpForm = () => {
+const LogInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState();
+
+  const styles = {
+    width: 300, //assign the width as your requirement
+  };
+
+  let history = useHistory();
 
   //checks if a user has previously logged in.
   useEffect(() => {
     setIsLoggedIn(localStorage.key("isLoggedIn"));
   }, []);
+
+  function handleEmailChange(e) {
+    setEmail(e.target.value);
+  }
+
+  function handlePasswordChange(e) {
+    setPassword(e.target.value);
+  }
 
   // logout the user
   const handleLogout = () => {
@@ -17,6 +33,8 @@ const SignUpForm = () => {
     setEmail("");
     setPassword("");
     localStorage.clear();
+    history.push("/login");
+    window.location.reload();
   };
 
   // login the user
@@ -61,45 +79,80 @@ const SignUpForm = () => {
   // if there's a user show the message below
   if (isLoggedIn) {
     return (
-      <div>
+      <Grid
+      container
+      spacing={3}
+      direction="column"
+      display="flex"
+      alignItems="center"
+      justify="center"
+      style={{ minHeight: "100vh" }}
+      >
         You are currently logged in.
-        <button onClick={handleLogout}>Logout?</button>
-      </div>
+        <br />
+
+        <Button
+        onClick={handleLogout}
+        style={{ width: styles.width }}
+        className="button"
+        variant="outlined"
+        >
+          Logout
+        </Button>
+      </Grid>
     );
   } else {
     // if there's no user, show the login form
     return (
-      <>
-        <h3>Log In</h3>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="email"><strong>Email: </strong></label>
-          <input
-            type="text"
-            value={email}
-            placeholder="Enter your email address"
-            onChange={({ target }) => setEmail(target.value)}
-          />
-          <br />
-          <br />
+      <Grid
+      container
+      spacing={3}
+      direction="column"
+      display="flex"
+      alignItems="center"
+      justify="center"
+      style={{ minHeight: "100vh" }}
+      >
+        <h2>Login</h2>
+        <br />
 
-          <label htmlFor="password"><strong>Password: </strong></label>
-          <input
-            type="password"
-            value={password}
-            placeholder="Enter your password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
-          <br />
-          <br />
+        <TextField
+          style={{ width: styles.width }}
+          required
+          onChange={handleEmailChange}
+          id="outlined-basic"
+          value={email}
+          label="Email"
+          variant="outlined"
+        />
+        <br />
 
-          <button type="submit">Login</button>
-        </form>
-      </>
+        <TextField
+          style={{ width: styles.width }}
+          required
+          onChange={handlePasswordChange}
+          id="outlined-basic"
+          value={password}
+          type="password"
+          label="Password"
+          variant="outlined"
+        />
+        <br />
+
+        <Button
+          style={{ width: styles.width }}
+          className="button"
+          variant="outlined"
+          onClick={handleSubmit}
+        >
+          Login
+        </Button>
+      </Grid>
     );
   }
 };
 
-export default SignUpForm;
+export default LogInForm;
 //1) Add a link in sign up to send the user to the log in page.
 //1) Figure out what the response return when the user logs in.
 //2) If the response is successful, then do nothing else let the user know his credentials are incorrect

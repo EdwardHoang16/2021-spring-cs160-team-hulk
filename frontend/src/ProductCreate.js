@@ -82,6 +82,11 @@ export default function ProductCreate(props) {
 
     // call backend
     processData();
+    setProductName("");
+    setImgUrl("");
+    setPrice(0.0);
+    setQuantity(0);
+    setFarmId("");
   };
 
   const processData = async () => {
@@ -145,6 +150,7 @@ export default function ProductCreate(props) {
           id="outlined-basic"
           label="Img URL"
           variant="outlined"
+          value={imgUrl}
         />
       </Grid>
       <Grid item xs={3}>
@@ -156,6 +162,7 @@ export default function ProductCreate(props) {
           fullWidth
           label="Quantity"
           inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+          value={quantity}
         />
       </Grid>
       <Grid item xs={3}>

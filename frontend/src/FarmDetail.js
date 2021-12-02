@@ -20,9 +20,16 @@ export default function FarmDetail() {
     setDetails(result.data);
   }, []);
 
+  /*
+  useEffect(async () => {
+    const result = await axios.get(`http://localhost:8080/api/products/${id}`)
+  })
+  */
+
   if (!details) {
     return null;
   }
+
 
   return (
     <>
@@ -45,6 +52,8 @@ export default function FarmDetail() {
       <Typography variant="h4" sx={{ margin: 1, marginTop: 2 }}>
         Featured Produce:
       </Typography>
+
+
     </>
   );
 }

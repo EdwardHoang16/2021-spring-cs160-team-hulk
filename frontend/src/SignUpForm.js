@@ -1,11 +1,17 @@
 import React, {useState} from "react";
-//import TextField from "@mui/material/TextField";
-//import Button from "@mui/material/Button";
 import "./SignUp.css";
+import { useHistory } from "react-router-dom";
+import { Grid, Button, TextField } from "@mui/material";
 
 export default function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const styles = {
+    width: 300, //assign the width as your requirement
+  };
+
+  let history = useHistory();
 
   function handleEmailChange(e) {
     setEmail(e.target.value)
@@ -39,26 +45,55 @@ export default function SignUpForm() {
     })
     .then(response => response.json())
     .then(data => console.log(data))
+
+    history.push("/login");
   }
 
   return (
-    <>
-      <h3>Sign Up</h3>
-      <p>Welcome to Organic Farms! Enter your email to get started.</p>
-
-      <form onSubmit={handleFormSubmit} >
-        <label htmlFor="email"><strong>Email: </strong></label>
-        <input type="email" id="email" value={email} onChange={handleEmailChange} />
-        <br />
-        <br />
-
-        <label htmlFor="email"><strong>Password: </strong></label>
-        <input type="password" id="password" value={password} onChange={handlePasswordChange} />
-        <br />
+    <Grid
+      container
+      spacing={3}
+      direction="column"
+      display="flex"
+      alignItems="center"
+      justify="center"
+      style={{ minHeight: "100vh" }}
+      >
+        <h2>Sign Up</h2>
+        <p>Welcome to Organic Farms! Enter your email to get started.</p>
         <br />
 
-        <input type="submit" value="Sign Up" />
-      </form>
-    </>
+        <TextField
+          style={{ width: styles.width }}
+          required
+          onChange={handleEmailChange}
+          id="outlined-basic"
+          value={email}
+          label="Email"
+          variant="outlined"
+        />
+        <br />
+
+        <TextField
+          style={{ width: styles.width }}
+          required
+          onChange={handlePasswordChange}
+          id="outlined-basic"
+          value={password}
+          type="password"
+          label="Password"
+          variant="outlined"
+        />
+        <br />
+
+        <Button
+          style={{ width: styles.width }}
+          className="button"
+          variant="outlined"
+          onClick={handleFormSubmit}
+        >
+          Sign Up
+        </Button>
+      </Grid>
   );
 }

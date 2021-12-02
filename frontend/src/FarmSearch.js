@@ -1,9 +1,14 @@
 import React, {useState} from "react";
 import SearchFarmList from "./SearchFarmsList.js";
 import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 
 export default function FarmSearch({listOfFarms}) {
     const [searchTerm, setSearchTerm] = useState("");
+
+    const styles = {
+        width: 300, //assign the width as your requirement
+      };
 
     function handleSearchChange(e) {
         setSearchTerm(e.target.value);
@@ -19,8 +24,13 @@ export default function FarmSearch({listOfFarms}) {
             justifyContent="center"
             >
                 <Grid item xs={3}>
-                    <label htmlFor="search"><strong>Search: </strong></label>
-                    <input type="text" value={searchTerm} onChange={handleSearchChange} id="search" />
+                    <TextField 
+                        style={{ width: styles.width }}
+                        onChange={handleSearchChange}
+                        value={searchTerm}
+                        label="Search"
+                        variant="outlined" 
+                    />
                 </Grid>
             </Grid>
             <SearchFarmList listOfFarms={listOfFarms} searchTerm={searchTerm} />
