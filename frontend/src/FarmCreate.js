@@ -80,6 +80,7 @@ export default function FarmCreate() {
           id="outlined-basic"
           label="Farm Name"
           variant="outlined"
+          value={farmName}
         />
       </Grid>
       <Grid item xs={3}>

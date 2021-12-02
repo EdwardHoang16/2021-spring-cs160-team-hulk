@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import HomePage from "./HomePage";
 import SignUpPage from "./SignUpPage";
-import LogInForm from "./LogInForm";
+import LogInPage from "./LogInPage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import MapPage from "./components/map/MapPage";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -9,6 +9,8 @@ import Navbar from "./components/Navbar/Navbar";
 import FarmCreate from "./FarmCreate";
 import ProductCreate from "./ProductCreate";
 import FarmDetail from "./FarmDetail";
+import FarmSearch from "./FarmSearch";
+import Account from "./Account";
 import axios from "axios";
 
 export default function App() {
@@ -94,7 +96,7 @@ export default function App() {
               <SignUpPage />
             </Route>
             <Route exact path="/login">
-              <LogInForm />
+              <LogInPage />
             </Route>
             <Route exact path="/farms/create">
               <FarmCreate />
@@ -102,11 +104,17 @@ export default function App() {
             <Route exact path="/products/create">
               <ProductCreate />
             </Route>
-            <Route exact path="/farms">
+            <Route exact path="/find-farms">
               <MapPage />
+            </Route>
+            <Route exact path="/farms">
+              <FarmSearch listOfFarms={listOfFarms} />
             </Route>
             <Route exact path="/farms/:id">
               <FarmDetail />
+            </Route>
+            <Route exact path="/account">
+              <Account />
             </Route>
           </Switch>
         </main>

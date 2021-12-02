@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const SignUpForm = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState();
 
@@ -14,7 +14,7 @@ const SignUpForm = () => {
   // logout the user
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setUsername("");
+    setEmail("");
     setPassword("");
     localStorage.clear();
   };
@@ -22,12 +22,12 @@ const SignUpForm = () => {
   // login the user
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userCredentials = { email: username, password: password };
-    // send the username and password to the server
-    const json = JSON.stringify({ email: username, password: password });
+    const userCredentials = { email: email, password: password };
+    // send the email and password to the server
+    const json = JSON.stringify({ email: email, password: password });
     console.log(userCredentials);
     const response = await axios
-      .get(`http://localhost:8080/api/userCredentials/verifyCredentials/${username}/${password}`)
+      .get(`http://localhost:8080/api/userCredentials/verifyCredentials/${email}/${password}`)
       .catch(function (error) {
         if (error.response) {
           console.log(error.response.data);
@@ -53,42 +53,48 @@ const SignUpForm = () => {
     setIsLoggedIn(response.data);
 
     // store the user in localStorage
-    localStorage.setItem("email", username);
+    localStorage.setItem("email", email);
     localStorage.setItem("isLoggedIn", JSON.stringify(response.data));
+    window.location.reload();
   };
 
   // if there's a user show the message below
   if (isLoggedIn) {
     return (
       <div>
-        you loggged in
-        <button onClick={handleLogout}>logout</button>
+        You are currently logged in.
+        <button onClick={handleLogout}>Logout?</button>
       </div>
     );
   } else {
     // if there's no user, show the login form
     return (
-      <div>
+      <>
+        <h3>Log In</h3>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="username">Username: </label>
+          <label htmlFor="email"><strong>Email: </strong></label>
           <input
             type="text"
-            value={username}
-            placeholder="enter a username"
-            onChange={({ target }) => setUsername(target.value)}
+            value={email}
+            placeholder="Enter your email address"
+            onChange={({ target }) => setEmail(target.value)}
           />
-          <div>
-            <label htmlFor="password">password: </label>
-            <input
-              type="password"
-              value={password}
-              placeholder="enter a password"
-              onChange={({ target }) => setPassword(target.value)}
-            />
-          </div>
+          <br />
+          <br />
+
+          <label htmlFor="password"><strong>Password: </strong></label>
+          <input
+            type="password"
+            value={password}
+            placeholder="Enter your password"
+            onChange={({ target }) => setPassword(target.value)}
+          />
+          <br />
+          <br />
+
           <button type="submit">Login</button>
         </form>
-      </div>
+      </>
     );
   }
 };

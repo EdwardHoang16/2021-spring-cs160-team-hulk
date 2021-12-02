@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Navbar from "./components/Navbar/Navbar";
+import { useHistory } from "react-router-dom";
 
 const styles = {
   root: {
@@ -31,12 +32,7 @@ export default function HomePage({ listOfFarms }) {
     <>
       {/* <FarmsList listOfFarms = { listOfFarms } /> */}
 
-      <Heading elevation={0}>
-        <Typography variant="h5">Browse local farms</Typography>
-      </Heading>
-
-      <br></br>
-
+      {/*
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={1}>
           <Grid item xs={6}>
@@ -63,10 +59,7 @@ export default function HomePage({ listOfFarms }) {
       </Box>
 
       <br></br>
-
-      <Heading elevation={0}>
-        <Typography variant="h5">Local produce delivered right to your door</Typography>
-      </Heading>
+      */}
 
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
@@ -92,9 +85,12 @@ export default function HomePage({ listOfFarms }) {
           </Grid>
         </Grid>
       </Box>
+      <br />
+      <br />
 
-      <br></br>
-
+      <Heading elevation={0}>
+        <Typography variant="h5">Local produce delivered right to your door</Typography>
+      </Heading>
       <Box>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -104,7 +100,14 @@ export default function HomePage({ listOfFarms }) {
           </Grid>
         </Grid>
       </Box>
+      <br />
+      <br />
 
+      <Heading elevation={0}>
+        <Typography variant="h5">Browse farms</Typography>
+      </Heading>
+
+      <br />
       <FarmsList listOfFarms={listOfFarms} />
     </>
   );
