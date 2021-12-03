@@ -47,6 +47,10 @@ export default function FarmDetail() {
         Featured Produce:
       </Typography>
 
+      {products.length === 0 && 
+        <Typography variant="h5" sx={{ margin: 1 }}>
+          None right now, check back later.
+        </Typography>}
       <ProductsList products={products} />
     </>
   );
