@@ -82,7 +82,7 @@ export default function FarmCreate() {
           name="farmName"
           onChange={(e) => handleChange(e.target.value, "farmName")}
           fullWidth
-          id="outlined-basic"
+          id="farm-name"
           label="Farm Name"
           variant="outlined"
           value={farmName}
@@ -93,7 +93,7 @@ export default function FarmCreate() {
           style={{ width: styles.width }}
           name="description"
           onChange={(e) => handleChange(e.target.value, "description")}
-          id="standard-multiline-static"
+          id="description"
           label="Description"
           multiline
           fullWidth
@@ -108,7 +108,7 @@ export default function FarmCreate() {
           name="imgUrl"
           onChange={(e) => handleChange(e.target.value, "imgUrl")}
           fullWidth
-          id="outlined-basic"
+          id="logo"
           label="Logo"
           variant="outlined"
           value={imgUrl}
@@ -120,7 +120,7 @@ export default function FarmCreate() {
           name="address"
           onChange={(e) => handleChange(e.target.value, "address")}
           fullWidth
-          id="outlined-basic"
+          id="address"
           label="Address"
           variant="outlined"
           value={address}
@@ -132,7 +132,7 @@ export default function FarmCreate() {
           name="contact"
           onChange={(e) => handleChange(e.target.value, "contact")}
           fullWidth
-          id="outlined-basic"
+          id="contact"
           label="Contact"
           variant="outlined"
           value={contact}

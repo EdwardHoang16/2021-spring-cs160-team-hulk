@@ -120,7 +120,7 @@ const LogInForm = () => {
           style={{ width: styles.width }}
           required
           onChange={handleEmailChange}
-          id="outlined-basic"
+          id="email"
           value={email}
           label="Email"
           variant="outlined"
@@ -131,7 +131,7 @@ const LogInForm = () => {
           style={{ width: styles.width }}
           required
           onChange={handlePasswordChange}
-          id="outlined-basic"
+          id="password"
           value={password}
           type="password"
           label="Password"
