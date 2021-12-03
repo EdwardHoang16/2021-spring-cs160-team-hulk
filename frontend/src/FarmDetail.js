@@ -3,33 +3,27 @@ import { useParams } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { listOfFarms } from "./mock-data";
 import axios from "axios";
+import ProductsList from "./ProductsList";
 
 export default function FarmDetail() {
   const { id } = useParams();
   const [details, setDetails] = useState();
-  //   let params = useParams();
-  //let details = listOfFarms.find((farm) => farm.id == params.id);
+  const [products, setProducts] = useState([]);
 
   useEffect(async () => {
     const result = await axios.get(`http://localhost:8080/api/farms/${id}`);
-    console.log(id);
-    console.log(result);
-    // setListOfFarms(result.data);
     setDetails(result.data);
   }, []);
 
-  /*
   useEffect(async () => {
-    const result = await axios.get(`http://localhost:8080/api/products/${id}`)
+    const result = await axios.get(`http://localhost:8080/api/farms/${id}/products`)
+    setProducts(result.data);
   })
-  */
 
   if (!details) {
     return null;
   }
-
 
   return (
     <>
@@ -53,7 +47,7 @@ export default function FarmDetail() {
         Featured Produce:
       </Typography>
 
-
+      <ProductsList products={products} />
     </>
   );
 }
