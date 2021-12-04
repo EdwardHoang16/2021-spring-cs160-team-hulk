@@ -7,11 +7,11 @@ export default function FarmsList({ listOfFarms }) {
   }
   let i = 0;
   let res = listOfFarms.map((farm) => {
-      // display 3 farm on homepage only
-    if (i == 3) {
-      return;
-    }
-    i++;
+    // display 3 farm on homepage only
+    // if (i == 3) {
+    //   return;
+    // }
+    // i++;
     return <Farm key={farm.id} details={farm} />;
   });
 

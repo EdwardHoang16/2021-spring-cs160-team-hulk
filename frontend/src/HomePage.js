@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Navbar from "./components/Navbar/Navbar";
 import { useHistory } from "react-router-dom";
+import { Container } from "@mui/material";
 
 const styles = {
   root: {
@@ -30,37 +31,6 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function HomePage({ listOfFarms }) {
   return (
     <>
-      {/* <FarmsList listOfFarms = { listOfFarms } /> */}
-
-      {/*
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={1}>
-          <Grid item xs={6}>
-            <Heading elevation={0}>
-              <Typography variant="h6">Dill's Pickle Farm</Typography>
-            </Heading>
-          </Grid>
-          <Grid item xs={6}>
-            <Heading elevation={0}>
-              <Typography variant="h6">Bob's Honey</Typography>
-            </Heading>
-          </Grid>
-          <Grid item xs={6}>
-            <Heading elevation={0}>
-              <Typography variant="h6">Fresh Family Farms</Typography>
-            </Heading>
-          </Grid>
-          <Grid item xs={6}>
-            <Heading elevation={0}>
-              <Typography variant="h6">Golden Oaks Acre</Typography>
-            </Heading>
-          </Grid>
-        </Grid>
-      </Box>
-
-      <br></br>
-      */}
-
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={4}>

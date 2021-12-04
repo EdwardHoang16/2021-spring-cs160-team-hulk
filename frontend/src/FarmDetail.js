@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import ProductsList from "./ProductsList";
+import { Container } from "@mui/material";
 
 export default function FarmDetail() {
   const { id } = useParams();
@@ -17,16 +18,16 @@ export default function FarmDetail() {
   }, []);
 
   useEffect(async () => {
-    const result = await axios.get(`http://localhost:8080/api/farms/${id}/products`)
+    const result = await axios.get(`http://localhost:8080/api/farms/${id}/products`);
     setProducts(result.data);
-  })
+  }, []);
 
   if (!details) {
     return null;
   }
 
   return (
-    <>
+    <Container>
       <Card sx={{ width: 1 }}>
         <CardMedia component="img" height="250" image={details.imgUrl} alt={details.farmName} />
       </Card>
@@ -47,11 +48,12 @@ export default function FarmDetail() {
         Featured Produce:
       </Typography>
 
-      {products.length === 0 && 
+      {products.length === 0 && (
         <Typography variant="h5" sx={{ margin: 1 }}>
           None right now, check back later.
-        </Typography>}
+        </Typography>
+      )}
       <ProductsList products={products} />
-    </>
+    </Container>
   );
 }
