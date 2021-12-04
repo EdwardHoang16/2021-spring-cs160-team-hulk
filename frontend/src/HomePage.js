@@ -6,9 +6,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import Navbar from "./components/Navbar/Navbar";
-import { useHistory } from "react-router-dom";
-import { Container } from "@mui/material";
+import Container from "@mui/material/Container";
 
 const styles = {
   root: {
@@ -30,7 +28,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function HomePage({ listOfFarms }) {
   return (
-    <>
+    <Container>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={4}>
@@ -47,7 +45,7 @@ export default function HomePage({ listOfFarms }) {
           </Grid>
           <Grid item xs={4}>
             <Item elevation={0}>
-              <Typography variant="h5">Free delivery for premium members</Typography>
+              <Typography variant="h6">Free delivery for premium members</Typography>
               <Typography variant="body2">
                 Premium members get free delivery for a small monthly fee
               </Typography>
@@ -76,9 +74,9 @@ export default function HomePage({ listOfFarms }) {
       <Heading elevation={0}>
         <Typography variant="h5">Browse farms</Typography>
       </Heading>
-
       <br />
+
       <FarmsList listOfFarms={listOfFarms} />
-    </>
+    </Container>
   );
 }

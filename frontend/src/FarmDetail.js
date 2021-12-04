@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 import axios from "axios";
 import ProductsList from "./ProductsList";
-import { Container } from "@mui/material";
 
 export default function FarmDetail() {
   const { id } = useParams();

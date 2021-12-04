@@ -27,28 +27,25 @@ export default function Farm({ details }) {
     );
 
     return (
-      <Grid container spacing={0} alignItems="center" justifyContent="center">
-        <Grid item xs={4}>
-          <Card sx={{ maxWidth: 500, marginTop: 2 }}>
-            <CardActionArea onClick={handleCardClick}>
-              <CardMedia
-                component="img"
-                height="200"
-                image={details.imgUrl}
-                alt={details.farmName}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {details.farmName}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {trimmedString}...
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </Grid>
-      </Grid>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea onClick={handleCardClick}>
+          <CardMedia
+            component="img"
+            height="140"
+            image={details.imgUrl}
+            alt={details.farmName}
+          />
+
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {details.farmName}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {trimmedString}...
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
     );
   }
 

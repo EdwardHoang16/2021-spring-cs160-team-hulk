@@ -1,19 +1,32 @@
 import React from "react";
 import Farm from "./Farm";
+import Grid from "@mui/material/Grid";
 
 export default function FarmsList({ listOfFarms }) {
   if (!listOfFarms) {
     return null;
   }
-  let i = 0;
-  let res = listOfFarms.map((farm) => {
-    // display 3 farm on homepage only
-    // if (i == 3) {
-    //   return;
-    // }
-    // i++;
-    return <Farm key={farm.id} details={farm} />;
-  });
 
-  return res;
+  const listOfDisplayedFarms = listOfFarms.map(farm => {
+    return (
+      <Grid
+      item
+      xs={4}>
+        <Farm key={farm.id} details={farm} />
+      </Grid>
+    )
+  })
+
+  return (
+    <Grid
+    container
+    spacing={1}
+    direction="row"
+    display="flex"
+    alignItems="center"
+    justify="center"
+    >
+        {listOfDisplayedFarms}
+    </Grid>
+)
 }

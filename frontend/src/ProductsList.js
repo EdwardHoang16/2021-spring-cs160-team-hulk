@@ -8,7 +8,7 @@ export default function ProductsList({products}) {
             <Grid
             item
             xs={3}>
-                <Product product={product} />
+                <Product key={product.id} product={product} />
             </Grid>
         )
     })

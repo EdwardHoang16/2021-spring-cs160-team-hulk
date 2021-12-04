@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import SearchFarmList from "./SearchFarmsList.js";
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
+import Container from '@mui/material/Container';
 
 export default function FarmSearch({listOfFarms}) {
     const [searchTerm, setSearchTerm] = useState("");
@@ -15,7 +16,7 @@ export default function FarmSearch({listOfFarms}) {
     }
 
     return (
-        <>
+        <Container>
             <Grid
             container
             spacing={0}
@@ -33,7 +34,9 @@ export default function FarmSearch({listOfFarms}) {
                     />
                 </Grid>
             </Grid>
+            <br />
+
             <SearchFarmList listOfFarms={listOfFarms} searchTerm={searchTerm} />
-        </>
+        </Container>
     )
 }
