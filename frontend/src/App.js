@@ -99,7 +99,7 @@ export default function App() {
               <LogInPage />
             </Route>
             <Route exact path="/farms/create">
-              <FarmCreate />
+              <FarmCreate setListOfFarms={setListOfFarms} listOfFarms={listOfFarms} />
             </Route>
             <Route exact path="/products/create">
               <ProductCreate />

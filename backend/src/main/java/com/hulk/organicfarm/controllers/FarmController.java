@@ -33,9 +33,8 @@ public class FarmController {
     }
 
     @PostMapping("/farms/{email}")
-    public void addFarms(@NonNull @RequestBody Farm farm, @PathVariable String email){
-        farmService.addFarm(farm, email);
-        System.out.println("save successfully");
+    public Farm addFarms(@NonNull @RequestBody Farm farm, @PathVariable String email){
+        return farmService.addFarm(farm, email);
     }
 
     @GetMapping("/farms/{farmId}")

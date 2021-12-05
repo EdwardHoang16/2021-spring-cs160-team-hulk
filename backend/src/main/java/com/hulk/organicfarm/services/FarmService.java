@@ -24,7 +24,7 @@ public class FarmService {
     }
 
     public List<Farm> getFarms() {
-        List<Farm>  res = this.farmRepository.findAll();
+        List<Farm> res = this.farmRepository.findAll();
         if (res.isEmpty()) {
             System.out.println("Zero Farms found");
             return res;
@@ -33,7 +33,7 @@ public class FarmService {
     }
 
     public List<Farm> getFarmsByCity(String city) {
-        List<Farm>  res = this.farmRepository.findAll();//find all farms by city, not done yet
+        List<Farm> res = this.farmRepository.findAll();//find all farms by city, not done yet
         if (res.isEmpty()) {
             System.out.println("Zero Farms found");
             return res;
@@ -42,25 +42,21 @@ public class FarmService {
     }
 
     @Transactional
-    public Farm getFarmById(String farmId){
+    public Farm getFarmById(String farmId) {
         Optional<Farm> farmOptional = farmRepository.findById(farmId);
         return farmOptional.orElse(null);
     }
 
     @Transactional
-    public String addFarm(Farm farm, String email) {
+    public Farm addFarm(Farm farm, String email) {
         Optional<UserCredentials> byEmail = userCredentialsRepository.findById(email);
         UserCredentials userCredentials = byEmail.orElseThrow(() -> new IllegalArgumentException("Could not fetch the user"));
-        try {
-            farm.setUserCredentials(userCredentials);
-            farmRepository.save(farm);
-        } catch (Exception e) {
-            return "Error! Could not add new Record";
-        }
-        return "Record Successfully Added!";
+        farm.setUserCredentials(userCredentials);
+        Farm savedFarm = farmRepository.save(farm);
+        return savedFarm;
     }
 
-    public List<Farm> getFarmsByEmail(String email){
+    public List<Farm> getFarmsByEmail(String email) {
         return farmRepository.getFarmsByEmail(email);
     }
 

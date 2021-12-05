@@ -4,8 +4,9 @@ import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import "./styles/SearchFarmList.css";
 import axios from "axios";
+import { listOfFarms } from "./mock-data";
 
-export default function FarmCreate() {
+export default function FarmCreate(props) {
   const [farmName, setFarmName] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [imgUrl, setImgUrl] = React.useState("");
@@ -61,7 +62,10 @@ export default function FarmCreate() {
     };
     const email = localStorage.getItem("email");
     if (email) {
-      await axios.post(`http://localhost:8080/api/farms/${email}`, farm);
+      const res = await axios.post(`http://localhost:8080/api/farms/${email}`, farm);
+      const cloneListOfFarms = JSON.parse(JSON.stringify(props.listOfFarms));
+      cloneListOfFarms.push(res.data);
+      props.setListOfFarms(cloneListOfFarms);
     }
   };
 
