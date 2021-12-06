@@ -4,37 +4,39 @@ This project has three parts, the frontend, the backend and the database. Backen
 
 This README assumes you are using a Debian-based GNU/Linux operating system.
 
-#### Frontend server
+#### 1. Frontend server
 
 To run the frontend server you need [Node.js](https://nodejs.org/en/) installed.
 
-If it is not installed, then run this command:
+- If it is not installed, then run this command:
  `sudo apt install npm`
 
-Go to the `frontend` folder and start the frontend server.
-
+- Go to the `frontend` folder.
 `cd frontend`
 
-If it is the first time you run the frontend, or you have missing modules after `git pull`, run:
+- If it is the first time you run the frontend, or you have missing modules after `git pull`, run:
 `npm install`
 
-To start the server, run:
+- To start the server, run:
 `npm start`
 
-#### Backend with in-memory database
+#### 2. Backend with in-memory database
 
-Make sure you have JRE installed. If it is not installed, then run this command:
+The backend is written in `Java`, you need Java virtual machine to run it.
+
+- Make sure you have JRE installed. If it is not installed, then run this command:
  `sudo apt install openjdk-17-jre`
 
-To run the backend server you can just use the Gradle wrapper `gradlew`.
+- Go to the `backend` folder.
+`cd backend`
 
-- `cd backend`
-- `SPRING_PROFILES_ACTIVE=local ./gradlew bootRun`
+- To run the backend server you can just use the Gradle wrapper `gradlew`.
+`SPRING_PROFILES_ACTIVE=local ./gradlew bootRun`
 
-#### Backend with postgres database
+#### 3. Backend with postgres database
 
 (TODO)
 
-#### Use `Docker` to start the servers
+#### 4. Use `Docker` to start the servers
 
 (TODO)
