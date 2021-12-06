@@ -1,10 +1,10 @@
-## Organic Farm
+# Organic Farm
 
 This project has three parts, the frontend, the backend and the database. Backend server should be brought up first before running the frontend server.
 
 This README assumes you are using a Debian-based GNU/Linux operating system.
 
-#### 1. Frontend server
+## 1. Frontend server
 
 To run the frontend server you need [Node.js](https://nodejs.org/en/) installed.
 
@@ -20,7 +20,7 @@ To run the frontend server you need [Node.js](https://nodejs.org/en/) installed.
 - To start the server, run:
 `npm start`
 
-#### 2. Backend with in-memory database
+## 2. Backend with in-memory database
 
 The backend is written in `Java`, you need Java virtual machine to run it.
 
@@ -33,10 +33,10 @@ The backend is written in `Java`, you need Java virtual machine to run it.
 - To run the backend server you can just use the Gradle wrapper `gradlew`.
 `SPRING_PROFILES_ACTIVE=local ./gradlew bootRun`
 
-#### 3. Backend with postgres database
+## 3. Backend with postgres database
 
 (TODO)
 
-#### 4. Use `Docker` to start the servers
+## 4. Use `Docker` to start the servers
 
 (TODO)
