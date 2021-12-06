@@ -57,12 +57,16 @@ sudo -u postgres createuser $USER
 sudo -u postgres createdb $USER -O $USER
 ```
 
-- Edit access control config file `/etc/postgresql/*/main/pg_hba.conf`, change `md5` in the following two line into `trust`
+- Then, edit access control config file `/etc/postgresql/*/main/pg_hba.conf`, change `md5` in the following two line into `trust`
 
 ```
 host    all             all             127.0.0.1/32            md5
 host    all             all             ::1/128                 md5
 ```
+
+- Finally, restart `postgresql` for changes in the config file to take effect.
+
+`sudo systemctl restart postgresql`
 
 ## 4. Backend with `postgresql` database
 
