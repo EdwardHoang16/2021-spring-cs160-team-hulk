@@ -1,6 +1,6 @@
 # Organic Farm
 
-This project has three parts, the frontend, the backend and the database. Backend server should be brought up first before running the frontend server.
+This project has three parts, the frontend, the backend and the database. Backend server should be brought up first before running the frontend server. Branching should be done off of the master branch.
 
 This README assumes you are using a Debian-based GNU/Linux operating system.
 
